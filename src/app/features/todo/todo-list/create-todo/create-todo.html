@@ -1,0 +1,21 @@
+<div class="add-todo-section">
+    <h2 mat-dialog-title class="title">Add New Task</h2>
+    <form class="example-form" [formGroup]="todoForm" (ngSubmit)="addTodo()">
+        <mat-dialog-content>
+            <mat-form-field class="example-full-width">
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Enter Title" formControlName="title">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Choose a date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dueDate">
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </mat-dialog-content>
+        <mat-dialog-actions>
+            <button matButton="filled" class="add-btn">Add Task</button>
+        </mat-dialog-actions>
+    </form>
+</div>

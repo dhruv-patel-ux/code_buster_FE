@@ -1,0 +1,74 @@
+<div class="todo-container">
+    <header class="todo-header">
+        <div class="header-content">
+            <h1>My Todo List</h1>
+            <div class="header-actions">
+                <button (click)="addTodo()" matButton="filled">Add Task</button>
+                <button (click)="onLogout()" matButton="outlined" class="logout-btn">Logout</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="todo-main">
+        <div class="stats">
+            <div class="stat-card">
+                <span class="stat-label">Total</span>
+                <span class="stat-value">{{ todoService.state().total }}</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Completed</span>
+                <span class="stat-value completed">{{ todoService.state().completed }}</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-label">Pending</span>
+                <span class="stat-value pending">{{ todoService.state().pending }}</span>
+            </div>
+        </div>
+
+        <div class="filter-section">
+            <button (click)="setFilter('all')" [class.active]="filter() === 'all'" class="filter-btn">
+                All
+            </button>
+            <button (click)="setFilter('pending')" [class.active]="filter() === 'pending'" class="filter-btn">
+                Pending
+            </button>
+            <button (click)="setFilter('completed')" [class.active]="filter() === 'completed'" class="filter-btn">
+                Completed
+            </button>
+        </div>
+
+        <div class="todos-section">
+            @for(todo of filteredTodos(); track $index){
+            <div class="todo-item" [class.completed]="todo.completed">
+                <div class="todo-content">
+                    <mat-checkbox class="example-margin todo-checkbox" [checked]="todo.completed"
+                        (change)="toggleTodo(todo.id)"></mat-checkbox>
+                    <span class="todo-title">{{ todo.title }}</span>
+                    @if(todo.dueDate){
+                    <span class="todo-date-display">
+                        {{ todo.dueDate | date: 'MMM dd, yyyy' }}
+                    </span>
+                    }
+                </div>
+                <button matMiniFab (click)="deleteTodo(todo.id)" class="delete-btn"
+                    aria-label="Example icon button with a home icon">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+            }
+            @if(filteredTodos.length === 0){
+            <div class="empty-state">
+                <p>No tasks found!</p>
+            </div>
+            }
+        </div>
+
+        @if(todoService.state().completed > 0){
+        <div class="footer-actions">
+            <button (click)="clearCompleted()" class="clear-btn">
+                Clear Completed ({{ todoService.state().completed }})
+            </button>
+        </div>
+        }
+    </main>
+</div>

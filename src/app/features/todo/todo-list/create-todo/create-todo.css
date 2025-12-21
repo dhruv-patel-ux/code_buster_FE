@@ -1,0 +1,15 @@
+ .add-todo-section {
+     padding: 24px;
+ }
+
+ .title {
+     padding: 20px 24px 0px;
+     color: #5703a4;
+ }
+
+ mat-dialog-content {
+     display: flex;
+     flex-direction: column;
+     justify-content: flex-start;
+     align-items: normal;
+ }

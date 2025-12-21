@@ -1,0 +1,22 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <h2>Login</h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+      <mat-form-field class="example-full-width">
+        <mat-label>Email</mat-label>
+        <input matInput placeholder="Enter Email" formControlName="email" type="email" />
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Password</mat-label>
+        <input matInput placeholder="Enter Password" formControlName="password" type="password" />
+      </mat-form-field>
+      <button matButton="filled" type="submit" [disabled]="loading()">
+        {{ loading() ? 'Logging in...' : 'Login' }}
+      </button>
+      @if(error){
+      <p class="error">{{ error }}</p>
+      }
+    </form>
+    <p>Don't have account? <span class="register-link" (click)="onRegister()">Register here</span></p>
+  </div>
+</div>
