@@ -1,9 +1,9 @@
  .add-todo-section {
-     padding: 24px;
+     padding: 12px;
  }
 
  .title {
-     padding: 20px 24px 0px;
+     padding-left: 24px;
      color: #5703a4;
  }
 

@@ -12,6 +12,7 @@ export interface TodoInterface {
   providedIn: 'root',
 })
 export class Todo {
+  storageKey = signal<string>('todos_list');
   todos = signal<TodoInterface[]>(this.loadTodos());
   state = computed(() =>{
      const todos = this.todos();
@@ -21,12 +22,11 @@ export class Todo {
       pending: todos.filter((t) => !t.completed).length,
     };
   })
-  private storageKey = 'todos_list';
 
   constructor() {}
 
   private loadTodos(): TodoInterface[] {
-    const stored = localStorage.getItem(this.storageKey);
+    const stored = localStorage.getItem(this.storageKey());
     return stored ? JSON.parse(stored) : [];
   }
 
@@ -76,6 +76,6 @@ export class Todo {
   }
 
   private saveTodos(): void {
-    localStorage.setItem(this.storageKey, JSON.stringify(this.todos()));
+    localStorage.setItem(this.storageKey(), JSON.stringify(this.todos()));
   }
 }
